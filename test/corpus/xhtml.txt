@@ -46,4 +46,7 @@ multi-line list
   (xhtml_tag)
   (xhtml_tag)
   (xhtml_tag)
+  (xhtml_tag)
+  (xhtml_tag)
+  (xhtml_tag)
   (xhtml_tag))

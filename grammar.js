@@ -59,7 +59,7 @@ module.exports = grammar({
     xhtml_tag_content: ($) =>
       repeat1(
         choice(
-          /[^ \t\n\r<]+/,
+          $._word,
           $.xhtml_tag,
           $.inline_quote,
           $.quote_escape,
@@ -94,7 +94,7 @@ module.exports = grammar({
 
     _double_terminator: ($) => /\r?\n\r?\n+/,
 
-    _word: ($) => token(prec(-1, /[^ \t\n\r]+/)),
+    _word: ($) => token(prec(-1, /([^ \t\n\r<{]|<\{)+/)),
   },
 });
 
