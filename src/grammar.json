@@ -18,7 +18,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "line"
+                "name": "_line"
               },
               {
                 "type": "REPEAT1",
@@ -32,7 +32,7 @@
         }
       ]
     },
-    "line": {
+    "_line": {
       "type": "CHOICE",
       "members": [
         {
@@ -581,8 +581,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "language_identifier"
+              "type": "FIELD",
+              "name": "language",
+              "content": {
+                "type": "SYMBOL",
+                "name": "language_identifier"
+              }
             },
             {
               "type": "BLANK"

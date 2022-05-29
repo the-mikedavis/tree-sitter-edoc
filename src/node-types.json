@@ -17,15 +17,22 @@
   {
     "type": "block_quote",
     "named": true,
-    "fields": {},
+    "fields": {
+      "language": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "language_identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "language_identifier",
-          "named": true
-        },
         {
           "type": "quote_content",
           "named": true
@@ -94,53 +101,6 @@
     "type": "inline_quote",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "line",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "block_quote",
-          "named": true
-        },
-        {
-          "type": "em_xhtml_tag",
-          "named": true
-        },
-        {
-          "type": "inline_quote",
-          "named": true
-        },
-        {
-          "type": "macro",
-          "named": true
-        },
-        {
-          "type": "quote_escape",
-          "named": true
-        },
-        {
-          "type": "section",
-          "named": true
-        },
-        {
-          "type": "strong_xhtml_tag",
-          "named": true
-        },
-        {
-          "type": "tag",
-          "named": true
-        },
-        {
-          "type": "xhtml_tag",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "macro",
@@ -246,7 +206,39 @@
       "required": false,
       "types": [
         {
-          "type": "line",
+          "type": "block_quote",
+          "named": true
+        },
+        {
+          "type": "em_xhtml_tag",
+          "named": true
+        },
+        {
+          "type": "inline_quote",
+          "named": true
+        },
+        {
+          "type": "macro",
+          "named": true
+        },
+        {
+          "type": "quote_escape",
+          "named": true
+        },
+        {
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "strong_xhtml_tag",
+          "named": true
+        },
+        {
+          "type": "tag",
+          "named": true
+        },
+        {
+          "type": "xhtml_tag",
           "named": true
         }
       ]

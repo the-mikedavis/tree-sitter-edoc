@@ -81,7 +81,7 @@ module.exports = grammar({
     block_quote: ($) =>
       seq(
         alias("```", $.quote_marker),
-        optional($.language_identifier),
+        optional(field("language", $.language_identifier)),
         $.quote_content,
         alias("'''", $.quote_marker)
       ),
