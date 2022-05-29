@@ -18,7 +18,7 @@ module.exports = grammar({
         choice(
           $.macro,
           $._word,
-          $.xhtml_tag,
+          $._xhtml_tag,
           $.inline_quote,
           $.block_quote,
           $.quote_escape
@@ -49,30 +49,44 @@ module.exports = grammar({
     tag: ($) => /@\w+/,
     argument: ($) => repeat1(choice(/[^}]/, $.macro_escape)),
 
+    _xhtml_tag: ($) => choice($.em_xhtml_tag, $.strong_xhtml_tag, $.xhtml_tag),
+
+    em_xhtml_tag: ($) => special_xhtml_tag($, "em"),
+    strong_xhtml_tag: ($) => special_xhtml_tag($, "strong"),
+
     xhtml_tag: ($) => seq("<", repeat(/[^>]/), ">"),
+
+    xhtml_tag_content: ($) =>
+      repeat1(
+        choice(
+          /[^ \t\n\r<]+/,
+          $.xhtml_tag,
+          $.inline_quote,
+          $.quote_escape,
+          $._terminator
+        )
+      ),
 
     macro_escape: ($) => choice("@{", "@}", "@@"),
 
     quote_escape: ($) => /`'/,
 
-    inline_quote: ($) => choice($._inline_quote, $._double_inline_quote),
+    inline_quote: ($) =>
+      choice($._inline_quote, $._double_inline_quote, $._triple_inline_quote),
 
-    _inline_quote: ($) => seq("`", /[^']+/, "'"),
-    _double_inline_quote: ($) => seq("``", repeat(/([^']|')/), "''"),
+    _inline_quote: ($) => seq("`", /[^'\r\n]+/, "'"),
+    _double_inline_quote: ($) => seq("``", repeat(/([^'\r\n]|')/), "''"),
+    _triple_inline_quote: ($) => seq("```", repeat(/([^'\r\n]|')/), "'''"),
 
     block_quote: ($) =>
       seq(
         alias("```", $.quote_marker),
-        optional(choice($._block_quote_with_identifier_body, $.quote_content)),
+        optional($.language_identifier),
+        $.quote_content,
         alias("'''", $.quote_marker)
       ),
 
-    _block_quote_with_identifier_body: ($) =>
-      seq(
-        alias($._word, $.language_identifier),
-        $._terminator,
-        $.quote_content
-      ),
+    language_identifier: ($) => /[\w_-]+\r?\n/,
 
     quote_content: ($) => repeat1(/([^']|')/),
 
@@ -93,5 +107,13 @@ function section($, marker) {
     alias(marker, $.section_marker),
     alias($._text_line, $.section_content),
     alias(marker, $.section_marker)
+  );
+}
+
+function special_xhtml_tag($, tagname) {
+  return seq(
+    alias(`<${tagname}>`, $.open_xhtml_tag),
+    $.xhtml_tag_content,
+    alias(`</${tagname}>`, $.close_xhtml_tag)
   );
 }

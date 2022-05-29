@@ -85,7 +85,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "xhtml_tag"
+            "name": "_xhtml_tag"
           },
           {
             "type": "SYMBOL",
@@ -351,6 +351,77 @@
         ]
       }
     },
+    "_xhtml_tag": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "em_xhtml_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "strong_xhtml_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "xhtml_tag"
+        }
+      ]
+    },
+    "em_xhtml_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "<em>"
+          },
+          "named": true,
+          "value": "open_xhtml_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "xhtml_tag_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "</em>"
+          },
+          "named": true,
+          "value": "close_xhtml_tag"
+        }
+      ]
+    },
+    "strong_xhtml_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "<strong>"
+          },
+          "named": true,
+          "value": "open_xhtml_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "xhtml_tag_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "</strong>"
+          },
+          "named": true,
+          "value": "close_xhtml_tag"
+        }
+      ]
+    },
     "xhtml_tag": {
       "type": "SEQ",
       "members": [
@@ -370,6 +441,34 @@
           "value": ">"
         }
       ]
+    },
+    "xhtml_tag_content": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[^ \\t\\n\\r<]+"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "xhtml_tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "inline_quote"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "quote_escape"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_terminator"
+          }
+        ]
+      }
     },
     "macro_escape": {
       "type": "CHOICE",
@@ -402,6 +501,10 @@
         {
           "type": "SYMBOL",
           "name": "_double_inline_quote"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_triple_inline_quote"
         }
       ]
     },
@@ -414,7 +517,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "[^']+"
+          "value": "[^'\\r\\n]+"
         },
         {
           "type": "STRING",
@@ -433,12 +536,32 @@
           "type": "REPEAT",
           "content": {
             "type": "PATTERN",
-            "value": "([^']|')"
+            "value": "([^'\\r\\n]|')"
           }
         },
         {
           "type": "STRING",
           "value": "''"
+        }
+      ]
+    },
+    "_triple_inline_quote": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "```"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "PATTERN",
+            "value": "([^'\\r\\n]|')"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "'''"
         }
       ]
     },
@@ -458,22 +581,17 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_block_quote_with_identifier_body"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "quote_content"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "language_identifier"
             },
             {
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "quote_content"
         },
         {
           "type": "ALIAS",
@@ -486,27 +604,9 @@
         }
       ]
     },
-    "_block_quote_with_identifier_body": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_word"
-          },
-          "named": true,
-          "value": "language_identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "quote_content"
-        }
-      ]
+    "language_identifier": {
+      "type": "PATTERN",
+      "value": "[\\w_-]+\\r?\\n"
     },
     "quote_content": {
       "type": "REPEAT1",

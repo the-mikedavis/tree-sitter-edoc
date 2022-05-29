@@ -7,7 +7,31 @@ em tag
 
 (source
   (line
-    (xhtml_tag)))
+    (em_xhtml_tag
+      (open_xhtml_tag)
+      (xhtml_tag_content)
+      (close_xhtml_tag))))
+
+================================================================================
+strong tag
+================================================================================
+<strong>Hello</strong>
+<strong>Hello
+World</strong>
+
+--------------------------------------------------------------------------------
+
+(source
+  (line
+    (strong_xhtml_tag
+      (open_xhtml_tag)
+      (xhtml_tag_content)
+      (close_xhtml_tag)))
+  (line
+    (strong_xhtml_tag
+      (open_xhtml_tag)
+      (xhtml_tag_content)
+      (close_xhtml_tag))))
 
 ================================================================================
 multi-line list

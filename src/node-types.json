@@ -53,6 +53,29 @@
     }
   },
   {
+    "type": "em_xhtml_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "close_xhtml_tag",
+          "named": true
+        },
+        {
+          "type": "open_xhtml_tag",
+          "named": true
+        },
+        {
+          "type": "xhtml_tag_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "expression",
     "named": true,
     "fields": {},
@@ -85,6 +108,10 @@
           "named": true
         },
         {
+          "type": "em_xhtml_tag",
+          "named": true
+        },
+        {
           "type": "inline_quote",
           "named": true
         },
@@ -98,6 +125,10 @@
         },
         {
           "type": "section",
+          "named": true
+        },
+        {
+          "type": "strong_xhtml_tag",
           "named": true
         },
         {
@@ -180,6 +211,10 @@
           "named": true
         },
         {
+          "type": "em_xhtml_tag",
+          "named": true
+        },
+        {
           "type": "inline_quote",
           "named": true
         },
@@ -189,6 +224,10 @@
         },
         {
           "type": "quote_escape",
+          "named": true
+        },
+        {
+          "type": "strong_xhtml_tag",
           "named": true
         },
         {
@@ -214,9 +253,55 @@
     }
   },
   {
+    "type": "strong_xhtml_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "close_xhtml_tag",
+          "named": true
+        },
+        {
+          "type": "open_xhtml_tag",
+          "named": true
+        },
+        {
+          "type": "xhtml_tag_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "xhtml_tag",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "xhtml_tag_content",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "inline_quote",
+          "named": true
+        },
+        {
+          "type": "quote_escape",
+          "named": true
+        },
+        {
+          "type": "xhtml_tag",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "'",
@@ -224,6 +309,10 @@
   },
   {
     "type": "''",
+    "named": false
+  },
+  {
+    "type": "'''",
     "named": false
   },
   {
@@ -259,7 +348,19 @@
     "named": false
   },
   {
+    "type": "```",
+    "named": false
+  },
+  {
+    "type": "close_xhtml_tag",
+    "named": true
+  },
+  {
     "type": "language_identifier",
+    "named": true
+  },
+  {
+    "type": "open_xhtml_tag",
     "named": true
   },
   {
