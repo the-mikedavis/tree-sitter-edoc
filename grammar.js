@@ -7,10 +7,26 @@ module.exports = grammar({
 
   rules: {
     source: ($) =>
-      repeat(seq($.line, repeat1($._terminator))),
-      // seq(sep1($.line, repeat1($._terminator)), optional($._terminator)),
+      seq(repeat($._terminator), repeat(seq($.line, repeat1($._terminator)))),
 
-    line: ($) => repeat1(choice($.macro, $._word, $.xhtml_tag)),
+    line: ($) => choice($.section, $._tag_line, $._text_line),
+
+    _tag_line: ($) => seq($.tag, optional($._text_line)),
+
+    _text_line: ($) =>
+      repeat1(
+        choice(
+          $.macro,
+          $._word,
+          $.xhtml_tag,
+          $.inline_quote,
+          $.block_quote,
+          $.quote_escape
+        )
+      ),
+
+    section: ($) =>
+      choice(section($, "=="), section($, "==="), section($, "====")),
 
     macro: ($) =>
       choice(
@@ -22,12 +38,12 @@ module.exports = grammar({
       seq(
         "{",
         alias("@link", $.tag),
-        $.expression,
+        alias($._link_expression, $.expression),
         optional(seq(".", alias($.argument, $.description))),
         "}"
       ),
 
-    expression: ($) =>
+    _link_expression: ($) =>
       prec.right(repeat1(choice(/[^\.}]/, $.macro_escape, "."))),
 
     tag: ($) => /@\w+/,
@@ -36,6 +52,29 @@ module.exports = grammar({
     xhtml_tag: ($) => seq("<", repeat(/[^>]/), ">"),
 
     macro_escape: ($) => choice("@{", "@}", "@@"),
+
+    quote_escape: ($) => /`'/,
+
+    inline_quote: ($) => choice($._inline_quote, $._double_inline_quote),
+
+    _inline_quote: ($) => seq("`", /[^']+/, "'"),
+    _double_inline_quote: ($) => seq("``", repeat(/([^']|')/), "''"),
+
+    block_quote: ($) =>
+      seq(
+        alias("```", $.quote_marker),
+        optional(choice($._block_quote_with_identifier_body, $.quote_content)),
+        alias("'''", $.quote_marker)
+      ),
+
+    _block_quote_with_identifier_body: ($) =>
+      seq(
+        alias($._word, $.language_identifier),
+        $._terminator,
+        $.quote_content
+      ),
+
+    quote_content: ($) => repeat1(/([^']|')/),
 
     _terminator: ($) => /\r?\n/,
 
@@ -47,4 +86,12 @@ module.exports = grammar({
 
 function sep1(rule, separator) {
   return seq(rule, repeat1(seq(separator, rule)));
+}
+
+function section($, marker) {
+  return seq(
+    alias(marker, $.section_marker),
+    alias($._text_line, $.section_content),
+    alias(marker, $.section_marker)
+  );
 }

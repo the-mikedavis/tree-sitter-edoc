@@ -1,0 +1,25 @@
+================================================================================
+sections
+================================================================================
+== Heading ==
+=== Sub-heading ===
+==== Sub-sub-heading ====
+
+--------------------------------------------------------------------------------
+
+(source
+  (line
+    (section
+      (section_marker)
+      (section_content)
+      (section_marker)))
+  (line
+    (section
+      (section_marker)
+      (section_content)
+      (section_marker)))
+  (line
+    (section
+      (section_marker)
+      (section_content)
+      (section_marker))))

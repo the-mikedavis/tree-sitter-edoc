@@ -1,0 +1,7 @@
+<em>Hello</em>
+
+{@link element/1}
+
+{@time}
+
+{@type {options, edoc:option_list()@}}
