@@ -448,8 +448,8 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "PATTERN",
-            "value": "[^ \\t\\n\\r<]+"
+            "type": "SYMBOL",
+            "name": "_word"
           },
           {
             "type": "SYMBOL",
@@ -634,7 +634,7 @@
         "value": -1,
         "content": {
           "type": "PATTERN",
-          "value": "[^ \\t\\n\\r]+"
+          "value": "([^ \\t\\n\\r<{]|<\\{)+"
         }
       }
     }
