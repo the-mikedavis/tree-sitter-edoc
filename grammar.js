@@ -7,9 +7,9 @@ module.exports = grammar({
 
   rules: {
     source: ($) =>
-      seq(repeat($._terminator), repeat(seq($.line, repeat1($._terminator)))),
+      seq(repeat($._terminator), repeat(seq($._line, repeat1($._terminator)))),
 
-    line: ($) => choice($.section, $._tag_line, $._text_line),
+    _line: ($) => choice($.section, $._tag_line, $._text_line),
 
     _tag_line: ($) => seq($.tag, optional($._text_line)),
 

@@ -6,11 +6,10 @@ em tag
 --------------------------------------------------------------------------------
 
 (source
-  (line
-    (em_xhtml_tag
-      (open_xhtml_tag)
-      (xhtml_tag_content)
-      (close_xhtml_tag))))
+  (em_xhtml_tag
+    (open_xhtml_tag)
+    (xhtml_tag_content)
+    (close_xhtml_tag)))
 
 ================================================================================
 strong tag
@@ -22,16 +21,14 @@ World</strong>
 --------------------------------------------------------------------------------
 
 (source
-  (line
-    (strong_xhtml_tag
-      (open_xhtml_tag)
-      (xhtml_tag_content)
-      (close_xhtml_tag)))
-  (line
-    (strong_xhtml_tag
-      (open_xhtml_tag)
-      (xhtml_tag_content)
-      (close_xhtml_tag))))
+  (strong_xhtml_tag
+    (open_xhtml_tag)
+    (xhtml_tag_content)
+    (close_xhtml_tag))
+  (strong_xhtml_tag
+    (open_xhtml_tag)
+    (xhtml_tag_content)
+    (close_xhtml_tag)))
 
 ================================================================================
 multi-line list
@@ -45,13 +42,8 @@ multi-line list
 --------------------------------------------------------------------------------
 
 (source
-  (line
-    (xhtml_tag))
-  (line
-    (xhtml_tag))
-  (line
-    (xhtml_tag))
-  (line
-    (xhtml_tag))
-  (line
-    (xhtml_tag)))
+  (xhtml_tag)
+  (xhtml_tag)
+  (xhtml_tag)
+  (xhtml_tag)
+  (xhtml_tag))
