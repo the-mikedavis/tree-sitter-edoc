@@ -37,8 +37,8 @@ jobs:
 
       - name: Commit generated parser files
         run: |
-          git config --local user.email "$(git log --format='%ae' HEAD^!)"
-          git config --local user.name "$(git log --format='%an' HEAD^!)"
+          git config --global user.email "$(git log --format='%ae' HEAD^!)"
+          git config --global user.name "$(git log --format='%an' HEAD^!)"
           git add src
           git commit -m "Generate parser" || true
           git push
@@ -53,8 +53,6 @@ jobs:
 
       - name: Commit generated wasm binding to the gh-pages branch
         run: |
-          git config --local user.email "$(git log --format='%ae' HEAD^!)"
-          git config --local user.name "$(git log --format='%an' HEAD^!)"
           cd ./gh-pages
           git add *.wasm
           git commit -m "Generate WASM binding" || true
