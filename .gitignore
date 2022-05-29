@@ -1,0 +1,16 @@
+/node_modules/
+/tmp/
+/build/
+/log.html
+/gh-pages/
+/.gitattributes
+/README.md
+/binding.gyp
+/bindings/
+/Cargo.toml
+/.github/
+/grammar.js
+/src/
+/test/
+/package.json
+/package-lock.json
