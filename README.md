@@ -8,5 +8,4 @@ _A tree-sitter grammar for the Erlang documentation generator (edoc) syntax_
 Some improvements to do:
 
 * Tags may only start on line beginnings
-* Macros may break on lines
-* XHTML injections aren't working yet
+* To inject Erlang into `@type` and `@spec`? I lean towards no, those should be migrated into `-type` and `-spec` attributes
