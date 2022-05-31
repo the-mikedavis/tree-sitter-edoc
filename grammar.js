@@ -94,7 +94,7 @@ module.exports = grammar({
 
     _double_terminator: ($) => /\r?\n\r?\n+/,
 
-    _word: ($) => token(prec(-1, /([^ \t\n\r<{]|<\{)+/)),
+    _word: ($) => token(prec(-1, /([^ \t\n\r<{`]|<\{`)+/)),
   },
 });
 
