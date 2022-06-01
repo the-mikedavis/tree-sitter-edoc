@@ -298,8 +298,17 @@
       ]
     },
     "tag": {
-      "type": "PATTERN",
-      "value": "@\\w+"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "TODO:"
+        },
+        {
+          "type": "PATTERN",
+          "value": "@\\w+"
+        }
+      ]
     },
     "argument": {
       "type": "REPEAT1",

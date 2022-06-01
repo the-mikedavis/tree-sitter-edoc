@@ -299,6 +299,11 @@
     }
   },
   {
+    "type": "tag",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "type",
     "named": true,
     "fields": {}
@@ -384,6 +389,10 @@
     "named": false
   },
   {
+    "type": "TODO:",
+    "named": false
+  },
+  {
     "type": "`",
     "named": false
   },
@@ -421,10 +430,6 @@
   },
   {
     "type": "section_marker",
-    "named": true
-  },
-  {
-    "type": "tag",
     "named": true
   },
   {
