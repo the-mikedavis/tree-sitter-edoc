@@ -42,7 +42,7 @@ module.exports = grammar({
         seq("{", $.tag, optional(seq(/\s+/, $.argument)), "}")
       ),
 
-    tag: ($) => /@\w+/,
+    tag: ($) => choice("TODO:", /@\w+/),
     argument: ($) => repeat1(choice(/[^}]/, $.macro_escape)),
 
     _link_macro: ($) =>
