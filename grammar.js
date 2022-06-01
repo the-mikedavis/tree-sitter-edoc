@@ -11,7 +11,15 @@ module.exports = grammar({
 
     _line: ($) => choice($.section, $._tag_line, $._text_line),
 
-    _tag_line: ($) => seq($.tag, optional($._text_line)),
+    _tag_line: ($) =>
+      choice($._author_line, seq($.tag, optional($._text_line))),
+
+    _author_line: ($) =>
+      seq(
+        alias("@author", $.tag),
+        repeat($._word),
+        optional(alias($.xhtml_tag, $.email_address))
+      ),
 
     _text_line: ($) =>
       repeat1(
