@@ -83,19 +83,41 @@
     }
   },
   {
+    "type": "email_address",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "expression",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "macro_escape",
+          "type": "arity",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "module",
+          "named": true
+        },
+        {
+          "type": "type",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "function",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "inline_quote",
@@ -131,6 +153,11 @@
   },
   {
     "type": "macro_escape",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "module",
     "named": true,
     "fields": {}
   },
@@ -214,6 +241,10 @@
           "named": true
         },
         {
+          "type": "email_address",
+          "named": true
+        },
+        {
           "type": "inline_quote",
           "named": true
         },
@@ -268,6 +299,11 @@
     }
   },
   {
+    "type": "type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "xhtml_tag",
     "named": true,
     "fields": {}
@@ -308,7 +344,23 @@
     "named": false
   },
   {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
     "type": ".",
+    "named": false
+  },
+  {
+    "type": "/",
+    "named": false
+  },
+  {
+    "type": ":",
     "named": false
   },
   {
@@ -342,6 +394,10 @@
   {
     "type": "```",
     "named": false
+  },
+  {
+    "type": "arity",
+    "named": true
   },
   {
     "type": "close_xhtml_tag",
