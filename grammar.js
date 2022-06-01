@@ -42,6 +42,9 @@ module.exports = grammar({
         seq("{", $.tag, optional(seq(/\s+/, $.argument)), "}")
       ),
 
+    tag: ($) => /@\w+/,
+    argument: ($) => repeat1(choice(/[^}]/, $.macro_escape)),
+
     _link_macro: ($) =>
       seq(
         "{",
@@ -52,10 +55,17 @@ module.exports = grammar({
       ),
 
     _link_expression: ($) =>
-      prec.right(repeat1(choice(/[^\.}]/, $.macro_escape, "."))),
+      choice(
+        $.module,
+        seq($.function, "/", $.arity),
+        seq(optional(seq($.module, ":")), $.function, "/", $.arity),
+        seq(optional(seq($.module, ":")), $.type, "(", ")")
+      ),
 
-    tag: ($) => /@\w+/,
-    argument: ($) => repeat1(choice(/[^}]/, $.macro_escape)),
+    module: ($) => $._atom,
+    function: ($) => $._atom,
+    type: ($) => $._atom,
+    arity: ($) => /\d+/,
 
     _xhtml_tag: ($) => choice($.em_xhtml_tag, $.strong_xhtml_tag, $.xhtml_tag),
 
@@ -103,6 +113,34 @@ module.exports = grammar({
     _double_terminator: ($) => /\r?\n\r?\n+/,
 
     _word: ($) => token(prec(-1, /([^ \t\n\r<{`]|<\{`)+/)),
+
+    _atom: ($) => choice($._unquoted_atom, $._quoted_atom),
+
+    // latin1 diacritics are allowed.
+    _unquoted_atom: ($) => token(/[a-zà-öø-ÿ][a-zA-ZÀ-ÿ0-9_@]*/),
+
+    _quoted_atom: ($) =>
+      seq("'", repeat(choice($._quoted_content, $._escape_sequence)), "'"),
+
+    _escape_sequence: ($) =>
+      token(
+        seq(
+          "\\",
+          choice(
+            // hexadecimal
+            /x[\da-fA-F]{2}/,
+            /x{[\da-fA-F]+}/,
+            // octal
+            /[0-7]{1,3}/,
+            // control sequences,
+            /\^[a-zA-Z\[\]\^_\\]/,
+            // characters
+            /[\x20-\x7f]/
+          )
+        )
+      ),
+
+    _quoted_content: ($) => /([^\\\"\']+|[\\\"\'])/,
   },
 });
 
