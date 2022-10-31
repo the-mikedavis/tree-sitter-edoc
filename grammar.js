@@ -12,7 +12,7 @@ module.exports = grammar({
     _line: ($) => choice($.section, $._tag_line, $._text_line),
 
     _tag_line: ($) =>
-      choice($._author_line, seq($.tag, optional($._text_line))),
+      choice($._author_line, $._see_line, seq($.tag, optional($._text_line))),
 
     _author_line: ($) =>
       seq(
@@ -20,6 +20,8 @@ module.exports = grammar({
         repeat($._word),
         optional(alias($.xhtml_tag, $.email_address))
       ),
+
+    _see_line: ($) => seq(alias("@see", $.tag), $.expression),
 
     _text_line: ($) =>
       repeat1(
@@ -49,12 +51,13 @@ module.exports = grammar({
       seq(
         "{",
         alias("@link", $.tag),
-        alias($._link_expression, $.expression),
+        $.expression,
         optional(seq(".", alias($.argument, $.description))),
         "}"
       ),
 
-    _link_expression: ($) =>
+    // Expressions, used in links and `@see` comments.
+    expression: ($) =>
       choice(
         $.module,
         seq($.function, "/", $.arity),
