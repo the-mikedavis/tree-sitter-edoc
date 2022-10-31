@@ -9,7 +9,9 @@ module.exports = grammar({
     source: ($) =>
       seq(repeat($._terminator), repeat(seq($._line, repeat1($._terminator)))),
 
-    _line: ($) => choice($.section, $._tag_line, $._text_line),
+    _line: ($) => choice($._separator, $.section, $._tag_line, $._text_line),
+
+    _separator: ($) => seq("=====", /=*/),
 
     _tag_line: ($) =>
       choice(
