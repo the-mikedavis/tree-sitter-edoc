@@ -61,6 +61,10 @@
           "name": "_see_line"
         },
         {
+          "type": "SYMBOL",
+          "name": "_param_line"
+        },
+        {
           "type": "SEQ",
           "members": [
             {
@@ -136,6 +140,41 @@
         {
           "type": "SYMBOL",
           "name": "expression"
+        }
+      ]
+    },
+    "_param_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@param"
+          },
+          "named": true,
+          "value": "tag"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_word"
+          },
+          "named": true,
+          "value": "parameter"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_text_line"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

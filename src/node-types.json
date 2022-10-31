@@ -257,6 +257,10 @@
           "named": true
         },
         {
+          "type": "parameter",
+          "named": true
+        },
+        {
           "type": "quote_escape",
           "named": true
         },
@@ -422,6 +426,10 @@
   },
   {
     "type": "open_xhtml_tag",
+    "named": true
+  },
+  {
+    "type": "parameter",
     "named": true
   },
   {
