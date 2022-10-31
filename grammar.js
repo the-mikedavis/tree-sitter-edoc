@@ -12,7 +12,12 @@ module.exports = grammar({
     _line: ($) => choice($.section, $._tag_line, $._text_line),
 
     _tag_line: ($) =>
-      choice($._author_line, $._see_line, seq($.tag, optional($._text_line))),
+      choice(
+        $._author_line,
+        $._see_line,
+        $._param_line,
+        seq($.tag, optional($._text_line))
+      ),
 
     _author_line: ($) =>
       seq(
@@ -22,6 +27,13 @@ module.exports = grammar({
       ),
 
     _see_line: ($) => seq(alias("@see", $.tag), $.expression),
+
+    _param_line: ($) =>
+      seq(
+        alias("@param", $.tag),
+        alias($._word, $.parameter),
+        optional($._text_line)
+      ),
 
     _text_line: ($) =>
       repeat1(
