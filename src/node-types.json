@@ -245,6 +245,10 @@
           "named": true
         },
         {
+          "type": "expression",
+          "named": true
+        },
+        {
           "type": "inline_quote",
           "named": true
         },

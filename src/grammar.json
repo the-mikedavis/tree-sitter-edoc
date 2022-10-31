@@ -57,6 +57,10 @@
           "name": "_author_line"
         },
         {
+          "type": "SYMBOL",
+          "name": "_see_line"
+        },
+        {
           "type": "SEQ",
           "members": [
             {
@@ -114,6 +118,24 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "_see_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@see"
+          },
+          "named": true,
+          "value": "tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression"
         }
       ]
     },
@@ -343,13 +365,8 @@
           "value": "tag"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_link_expression"
-          },
-          "named": true,
-          "value": "expression"
+          "type": "SYMBOL",
+          "name": "expression"
         },
         {
           "type": "CHOICE",
@@ -383,7 +400,7 @@
         }
       ]
     },
-    "_link_expression": {
+    "expression": {
       "type": "CHOICE",
       "members": [
         {
