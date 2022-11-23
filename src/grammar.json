@@ -740,7 +740,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "[^'\\r\\n]+"
+          "value": "[^']+"
         },
         {
           "type": "STRING",
@@ -759,7 +759,7 @@
           "type": "REPEAT",
           "content": {
             "type": "PATTERN",
-            "value": "([^'\\r\\n]|')"
+            "value": "([^`']|')"
           }
         },
         {
