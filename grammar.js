@@ -109,8 +109,8 @@ module.exports = grammar({
     inline_quote: ($) =>
       choice($._inline_quote, $._double_inline_quote, $._triple_inline_quote),
 
-    _inline_quote: ($) => seq("`", /[^'\r\n]+/, "'"),
-    _double_inline_quote: ($) => seq("``", repeat(/([^'\r\n]|')/), "''"),
+    _inline_quote: ($) => seq("`", /[^']+/, "'"),
+    _double_inline_quote: ($) => seq("``", repeat(/([^`']|')/), "''"),
     _triple_inline_quote: ($) => seq("```", repeat(/([^'\r\n]|')/), "'''"),
 
     block_quote: ($) =>
